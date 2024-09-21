@@ -67,16 +67,26 @@ describe("Array  test", () => {
   });
 });
 
-//Array  test...
-describe("Array  test", () => {
-  test("Array test check", () => {
-    const todoList = [
-      "Buy chocolate",
-      "clean room",
-      "subscribe",
-      "like",
-      "comment",
-    ];
-    expect(todoList).toContain("subscribe");
+//Exception matchers...
+describe("Exception matchers  test", () => {
+  test("Exception matchers test check", () => {
+    function openInvalidFile(params) {
+      throw new Error("File Not Found");
+    }
+    expect(() => openInvalidFile()).toThrow();
+    expect(() => openInvalidFile()).toThrow("File Not Found");
+    expect(() => openInvalidFile()).not.toThrow(/not found/);
+  });
+
+  test("drinks without returns", () => {
+    const drink = jest.fn(() => true);
+    drink();
+    expect(drink).toHaveReturned();
+  });
+
+  test("drinks with returns", () => {
+    const drink = jest.fn(() => true);
+    drink();
+    expect(drink).toHaveReturnedWith(true);
   });
 });
